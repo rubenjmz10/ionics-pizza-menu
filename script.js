@@ -12,7 +12,7 @@ const menuData = [
     { id: 9, categoria: "Pizzas", nombre: "Perona", desc: "Un equilibrio entre lo intenso, lo dulce y lo salado.<br> Salsa de tomate casera, queso mozzarella, pera caramelizada con piloncillo, queso azul, tocino ahumado y nuez pecana.", precio: 235, disponible: true },
     
     // Pizzas Especiales (NUEVAS)
-    { id: 25, categoria: "Pizzas Especiales", nombre: "Barbacoa de Picaña", desc: "Deliciosa barbacoa de picaña, cebolla y cilantro fresco.", precio: 250, disponible: true, especial: true, salsaVerde: true },
+    { id: 25, categoria: "Pizzas Especiales", nombre: "Barbacoa de Picaña", desc: "Deliciosa barbacoa de picaña, cebolla y cilantro fresco.", precio: 320, disponible: true, especial: true, salsaVerde: true },
     { id: 26, categoria: "Pizzas Especiales", nombre: "Burrata", desc: "Auténtico queso burrata y jamón serrano.", precio: 250, disponible: true, especial: true, permiteMitad: false },
     { id: 27, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Especialidad con tocino.", precio: 250, disponible: true, especial: true },
     { id: 28, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Corazones de alcachofa. Elige tu complemento.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
