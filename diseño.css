@@ -1,0 +1,47 @@
+/* ... (Mantener todo el CSS anterior) ... */
+
+/* ESTILOS DEL MODAL */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.7);
+    align-items: center; justify-content: center;
+}
+
+.modal-contenido {
+    background-color: var(--blanco);
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-contenido hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; }
+
+.grid-extras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancelar { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; background: #ccc; }
+.btn-confirmar { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; background: var(--naranja); color: white; font-weight: bold; }
+
+#notas-modal { margin-top: 5px; }
+
+/* Ajuste responsivo para el modal */
+@media (max-width: 768px) {
+    .modal-contenido { width: 95%; padding: 15px; }
+    .grid-extras { grid-template-columns: 1fr; }
+}
