@@ -26,6 +26,13 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    /* NUEVO: Transición suave para que no desaparezca de golpe */
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* NUEVO: Clase que JavaScript le pondrá al header para ocultarlo */
+.header-oculto {
+    transform: translateY(-100%);
 }
 
 .nav-container {
@@ -139,8 +146,8 @@ body {
 .categoria-titulo {
     border-bottom: 3px solid var(--naranja);
     padding-bottom: 5px;
-    margin-top: 40px; /* Separación extra para que el scroll del menú no lo tape */
-    scroll-margin-top: 80px; /* Para que al hacer clic en el menú superior no se oculte el título */
+    margin-top: 40px; 
+    scroll-margin-top: 80px; 
 }
 
 /* 5. TARJETAS DE PRODUCTO */
@@ -185,7 +192,7 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     height: fit-content;
     position: sticky;
-    top: 90px; /* Ajustado para que no choque con la navbar */
+    top: 90px; 
     scroll-margin-top: 90px;
 }
 

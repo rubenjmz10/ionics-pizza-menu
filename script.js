@@ -87,7 +87,6 @@ function renderizarMenu() {
             const titulo = document.createElement('h2');
             titulo.className = 'categoria-titulo';
             titulo.textContent = categoria;
-            // NUEVO: Se le asigna un ID a cada categoría para que la barra de navegación funcione
             titulo.id = 'cat-' + categoria.replace(/\s+/g, '-'); 
             contenedor.appendChild(titulo);
 
@@ -523,3 +522,22 @@ function enviarWhatsApp() {
 
 // Iniciar
 renderizarMenu();
+
+// --- 6. LÓGICA DE BARRA DE NAVEGACIÓN INTELIGENTE (SCROLL) ---
+let ultimoScroll = window.pageYOffset || document.documentElement.scrollTop;
+const header = document.querySelector('.header-principal');
+
+window.addEventListener('scroll', function() {
+    const scrollActual = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Si hace scroll hacia ABAJO y ya pasó la parte de hasta arriba (ej. 80px)
+    if (scrollActual > ultimoScroll && scrollActual > 80) {
+        header.classList.add('header-oculto');
+    } else {
+        // Si hace scroll hacia ARRIBA
+        header.classList.remove('header-oculto');
+    }
+    
+    // Evita valores negativos por el efecto rebote en Safari/iOS
+    ultimoScroll = scrollActual <= 0 ? 0 : scrollActual; 
+}, false);
