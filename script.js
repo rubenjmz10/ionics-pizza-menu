@@ -17,7 +17,7 @@ const menuData = [
     { id: 12, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Especialidad con tocino.", precio: 250, disponible: true, especial: true },
     { id: 13, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Base blanca de garbanzo, Queso provolone, Corazones de alcachofa, Espinacas, Chorizo argentino o champiñones.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
     { id: 14, categoria: "Pizzas Especiales", nombre: "Higo y Panceta", desc: "Base blanca de aceite de oliva, , queso mozzarella, panceta con cebolla caramelizada al vino tinto, queso de cabra, nuez, albahaca fresca ", precio: 250, disponible: true, especial: true},
-    { id: 15, categoria: "Pizzas Especiales", nombre: "Huitlacoche", desc: "Huitlacoche", precio: 250, disponible: false, especial: true},
+    { id: 15, categoria: "Pizzas Especiales", nombre: "Huitlacoche", desc: "Huitlacoche", precio: 250, disponible: true, especial: true},
 
     // Especialidades
     { id: 16, categoria: "Hot Dog y Calzones", nombre: "Hot Dog con Madre", desc: "Nuestro Hot Dog es una experiencia única.<br> Horneado en una base de masa madre con una salchicha de res, carne molida sazonada con especias, queso mozarella y cebolla asada, con opción de tocino, champiñones, migas de chicharrón o un poco de los 3. Tamaño 22 cm. aprox.", precio: 140, disponible: true, eleccionGratis: ["Tocino", "Champiñones", "Migas de chicharron", "Mixto"] },
@@ -36,7 +36,8 @@ const menuData = [
     { id: 20, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 350ml", desc: "", precio: 32, disponible: true },
     { id: 21, categoria: "Bebidas Frías", nombre: "Agua mineral de Lourdes 355ml", desc: "", precio: 26, disponible: true },
     { id: 22, categoria: "Bebidas Frías", nombre: "Agua de jamaica c/agua mineral 355ml", desc: "", precio: 48, disponible: true },
-    { id: 23, categoria: "Bebidas Frías", nombre: "Agua de jamaica o frutas 1 Litro", desc: "", precio: 75, disponible: true },
+    { id: 23, categoria: "Bebidas Frías", nombre: "Agua de jamaica 1 Litro", desc: "", precio: 75, disponible: true },
+    { id: 36, categoria: "Bebidas Frías", nombre: "Agua de frutas 1 Litro", desc: "", precio: 75, disponible: true },
 
     // Bebidas Calientes
     { id: 24, categoria: "Bebidas Calientes", nombre: "Espresso 45ml", desc: "Con café", precio: 45, disponible: true },
@@ -624,8 +625,7 @@ function verificarHorarioAbierto() {
 }
 
 // --- 8. CONEXIÓN CON GOOGLE SHEETS PARA DISPONIBILIDAD ---
-// 🚨 ¡RECUERDA PEGAR TU ENLACE LARGO DE GOOGLE SHEETS AQUÍ ABAJO! 🚨
-const URL_GOOGLE_SHEET = "PEGAR_AQUI_TU_ENLACE_LARGO_DE_GOOGLE_SHEETS";
+const URL_GOOGLE_SHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1dw7kEipFxgh00tRyp4siXLJRkGZUjhvDA_9wWJGZOPzA7aCfmI19G-gNr5lgrsSK46K1KMPYkx3J/pub?output=csv";
 
 async function cargarDisponibilidadYRenderizar() {
     try {
