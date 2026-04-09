@@ -629,7 +629,7 @@ const URL_GOOGLE_SHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1dw7
 
 async function cargarDisponibilidadYRenderizar() {
     try {
-        const respuesta = await fetch(URL_GOOGLE_SHEET);
+        const respuesta = await fetch(URL_GOOGLE_SHEET + "&t=" + new Date().getTime());
         const textoCSV = await respuesta.text();
         
         const filas = textoCSV.split('\n').slice(1);
