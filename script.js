@@ -248,11 +248,13 @@ function generarInterfazExtras() {
 function llenarSelectorMitad(idActual) {
     const select = document.getElementById('segunda-pizza-select');
     select.innerHTML = '';
-    // Filtramos para que se pueda combinar con Clásicas o Especiales (que permitan mitad)
+    // Filtramos para que se pueda combinar con Clásicas o Especiales, 
+    // que permita mitad, ¡Y QUE ESTÉ DISPONIBLE!
     const otrasPizzas = menuData.filter(p => 
         (p.categoria === "Pizzas" || p.categoria === "Pizzas Especiales") && 
         p.id !== idActual && 
-        p.permiteMitad !== false
+        p.permiteMitad !== false &&
+        p.disponible === true // <-- ¡Aquí está la corrección!
     );
     otrasPizzas.forEach(p => {
         select.innerHTML += `<option value="${p.id}">${p.nombre} ($${p.precio})</option>`;
