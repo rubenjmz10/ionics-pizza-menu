@@ -6,7 +6,6 @@
     --blanco: #ffffff;
 }
 
-/* Scroll suave para cuando hagan clic en el menú */
 html {
     scroll-behavior: smooth; 
 }
@@ -26,11 +25,9 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* NUEVO: Transición suave para que no desaparezca de golpe */
     transition: transform 0.3s ease-in-out; 
 }
 
-/* NUEVO: Clase que JavaScript le pondrá al header para ocultarlo */
 .header-oculto {
     transform: translateY(-100%);
 }

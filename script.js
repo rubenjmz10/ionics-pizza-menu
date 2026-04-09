@@ -481,7 +481,7 @@ function enviarWhatsApp() {
     const cambio = document.getElementById('cambio').value;
     const quiereSalsaMacha = document.getElementById('check-salsa-macha').checked;
     
-    // NUEVO: Obtener datos de horario
+    // Obtener datos de horario
     const opcionHorario = document.getElementById('horario-entrega').value;
     let horaEspecifica = "";
     if (opcionHorario === 'Programar horario') {
@@ -516,7 +516,7 @@ function enviarWhatsApp() {
         mensaje += `\n*🌶️ Extras:* SÍ quiero Salsita Macha`;
     }
 
-    // NUEVO: Agregar horario al mensaje
+    // Agregar horario al mensaje
     if (opcionHorario === 'Lo más pronto posible') {
         mensaje += `\n*Horario:* Lo más pronto posible`;
     } else {
@@ -550,9 +550,6 @@ function enviarWhatsApp() {
     }
 }
 
-// Iniciar
-renderizarMenu();
-
 // --- 6. LÓGICA DE BARRA DE NAVEGACIÓN INTELIGENTE (SCROLL) ---
 let ultimoScroll = window.pageYOffset || document.documentElement.scrollTop;
 const header = document.querySelector('.header-principal');
@@ -560,14 +557,92 @@ const header = document.querySelector('.header-principal');
 window.addEventListener('scroll', function() {
     const scrollActual = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Si hace scroll hacia ABAJO y ya pasó la parte de hasta arriba (ej. 80px)
     if (scrollActual > ultimoScroll && scrollActual > 80) {
         header.classList.add('header-oculto');
     } else {
-        // Si hace scroll hacia ARRIBA
         header.classList.remove('header-oculto');
     }
     
-    // Evita valores negativos por el efecto rebote en Safari/iOS
     ultimoScroll = scrollActual <= 0 ? 0 : scrollActual; 
 }, false);
+
+// --- 7. LÓGICA DE HORARIOS DE APERTURA ---
+function verificarHorarioAbierto() {
+    const horaMexico = new Date().toLocaleString("en-US", {timeZone: "America/Mexico_City"});
+    const fechaMexico = new Date(horaMexico);
+
+    const dia = fechaMexico.getDay(); 
+    const hora = fechaMexico.getHours(); 
+    const minutos = fechaMexico.getMinutes();
+    
+    const horaActualDecimal = hora + (minutos / 60);
+
+    let abierto = false;
+
+    // Regla 1: Jueves (4) y Viernes (5) de 6:00 PM (18.0) a 10:00 PM (22.0)
+    if (dia === 4 || dia === 5) {
+        if (horaActualDecimal >= 18.0 && horaActualDecimal < 22.0) {
+            abierto = true; 
+        }
+    }
+    // Regla 2: Sábado (6) y Domingo (0) de 3:00 PM (15.0) a 10:00 PM (22.0)
+    else if (dia === 6 || dia === 0) {
+        if (horaActualDecimal >= 15.0 && horaActualDecimal < 22.0) {
+            abierto = true; 
+        }
+    }
+
+    if (!abierto) {
+        const btnPedir = document.querySelector('.btn-pedir');
+        
+        if (btnPedir) { 
+            btnPedir.disabled = true;
+            btnPedir.style.backgroundColor = '#999'; 
+            btnPedir.style.cursor = 'not-allowed';
+            btnPedir.textContent = 'Cerrado por el momento';
+
+            const aviso = document.createElement('div');
+            aviso.innerHTML = '⚠️ <strong>¡Estamos descansando!</strong><br>Nuestro horario de servicio es:<br>• <strong>Jueves y Viernes:</strong> 6:00 PM a 10:00 PM<br>• <strong>Sábado y Domingo:</strong> 3:00 PM a 10:00 PM<br>Puedes ver el menú y armar tu pedido, pero podrás enviarlo hasta que abramos.';
+            aviso.style = 'background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 15px; text-align: center; border: 1px solid #f5c6cb; font-size: 0.9em; line-height: 1.5;';
+            
+            btnPedir.parentNode.insertBefore(aviso, btnPedir);
+        }
+    }
+}
+
+// --- 8. CONEXIÓN CON GOOGLE SHEETS PARA DISPONIBILIDAD ---
+// 🚨 ¡RECUERDA PEGAR TU ENLACE LARGO DE GOOGLE SHEETS AQUÍ ABAJO! 🚨
+const URL_GOOGLE_SHEET = "PEGAR_AQUI_TU_ENLACE_LARGO_DE_GOOGLE_SHEETS";
+
+async function cargarDisponibilidadYRenderizar() {
+    try {
+        const respuesta = await fetch(URL_GOOGLE_SHEET);
+        const textoCSV = await respuesta.text();
+        
+        const filas = textoCSV.split('\n').slice(1);
+        
+        filas.forEach(fila => {
+            if (!fila.trim()) return; 
+            
+            const columnas = fila.split(',');
+            
+            const idSheet = parseInt(columnas[0].trim());
+            const disponibleSheet = columnas[2].trim().toUpperCase() === 'SI';
+            
+            const productoEnMenu = menuData.find(p => p.id === idSheet);
+            if (productoEnMenu) {
+                productoEnMenu.disponible = disponibleSheet;
+            }
+        });
+
+        renderizarMenu();
+
+    } catch (error) {
+        console.error("Hubo un error leyendo Google Sheets, cargando menú por defecto...", error);
+        renderizarMenu();
+    }
+}
+
+// Iniciar aplicación
+verificarHorarioAbierto();
+cargarDisponibilidadYRenderizar();
