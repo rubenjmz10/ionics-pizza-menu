@@ -170,6 +170,13 @@ function abrirModal(id) {
         
     } else if (producto.nombre.includes("Hot Dog")) {
         opcionesHotdog.style.display = 'block';
+        // NUEVO: Asegurarnos de que el cuadro de elección aparezca si es Hot Dog
+        if (producto.eleccionGratis) {
+            document.getElementById('opciones-pizza').style.display = 'block'; 
+            document.getElementById('seccion-mitad-pizza').style.display = 'none'; 
+            document.getElementById('seccion-extras-pizza').style.display = 'none'; 
+        }
+
     } else if (producto.personalizable) {
         opcionesBebida.style.display = 'block';
         
@@ -356,6 +363,12 @@ function confirmarAgregar() {
         
         if (aderezosSeleccionados.length > 0) {
             resumenExtras.push(`Aderezos: ${aderezosSeleccionados.join(", ")}`);
+        }
+
+        // NUEVO: Agregado para que capture la elección gratis del Hot Dog
+        if (productoEnEdicion.eleccionGratis) {
+            const eleccion = document.getElementById('selector-eleccion').value;
+            resumenExtras.push(`Lleva: ${eleccion}`);
         }
     }
 
