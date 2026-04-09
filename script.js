@@ -452,6 +452,17 @@ function verificarCamposCondicionales() {
     document.getElementById('aviso-mercadopago').style.display = isMercadoPago ? 'block' : 'none';
 }
 
+function toggleHorarioEspecifico() {
+    const selectorHorario = document.getElementById('horario-entrega').value;
+    const campoHoraEspecifica = document.getElementById('campo-horario-especifico');
+    
+    if (selectorHorario === 'Programar horario') {
+        campoHoraEspecifica.style.display = 'flex';
+    } else {
+        campoHoraEspecifica.style.display = 'none';
+    }
+}
+
 // Event Listeners para detectar cambios en el formulario
 document.getElementById('tipo-entrega').addEventListener('change', verificarCamposCondicionales);
 document.getElementById('metodo-pago').addEventListener('change', verificarCamposCondicionales);
@@ -469,9 +480,21 @@ function enviarWhatsApp() {
     const metodoPago = document.getElementById('metodo-pago').value;
     const cambio = document.getElementById('cambio').value;
     const quiereSalsaMacha = document.getElementById('check-salsa-macha').checked;
+    
+    // NUEVO: Obtener datos de horario
+    const opcionHorario = document.getElementById('horario-entrega').value;
+    let horaEspecifica = "";
+    if (opcionHorario === 'Programar horario') {
+        horaEspecifica = document.getElementById('hora-especifica').value;
+    }
 
     // VALIDACIONES
     if (!nombre) { alert("Por favor ingresa tu nombre."); return; }
+    
+    if (opcionHorario === 'Programar horario' && !horaEspecifica) {
+        alert("Por favor selecciona la hora a la que deseas tu pedido.");
+        return;
+    }
     
     if (tipoEntrega === 'A domicilio') {
         if (!telefono || !direccion) {
@@ -491,6 +514,13 @@ function enviarWhatsApp() {
     
     if (quiereSalsaMacha) {
         mensaje += `\n*🌶️ Extras:* SÍ quiero Salsita Macha`;
+    }
+
+    // NUEVO: Agregar horario al mensaje
+    if (opcionHorario === 'Lo más pronto posible') {
+        mensaje += `\n*Horario:* Lo más pronto posible`;
+    } else {
+        mensaje += `\n*Horario:* Programado para las ${horaEspecifica}`;
     }
 
     mensaje += `\n*Servicio:* ${tipoEntrega}`;

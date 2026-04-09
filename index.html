@@ -49,6 +49,16 @@
                 <label for="nombre">Tu Nombre:</label>
                 <input type="text" id="nombre" required placeholder="Nombre completo">
 
+                <label for="horario-entrega">Horario de Entrega:</label>
+                <select id="horario-entrega" required onchange="toggleHorarioEspecifico()">
+                    <option value="Lo más pronto posible">Lo más pronto posible</option>
+                    <option value="Programar horario">Programar para un horario específico</option>
+                </select>
+
+                <div id="campo-horario-especifico" style="display: none; flex-direction: column; gap: 10px; margin-top: 5px;">
+                    <label for="hora-especifica">Selecciona la hora (dentro del horario de servicio):</label>
+                    <input type="time" id="hora-especifica">
+                </div>
                 <label for="tipo-entrega">Tipo de Servicio:</label>
                 <select id="tipo-entrega" required>
                     <option value="Para comer aquí">Para comer aquí</option>
