@@ -652,7 +652,6 @@ async function cargarDisponibilidadYRenderizar() {
 
     } catch (error) {
         console.error("Hubo un error leyendo Google Sheets, cargando menú por defecto...", error);
-        renderizarMenu();
     }
 }
 
