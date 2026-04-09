@@ -8,15 +8,35 @@
 </head>
 <body>
 
-    <header>
-        <img src="logo.png" alt="Ionics Pizza" class="logo-header">
-        <h1>Menú Digital</h1>
+    <header class="header-principal">
+        <div class="nav-container">
+            <img src="logo.png" alt="Ionics Pizza" class="logo-nav">
+            <nav class="nav-links">
+                <a href="#cat-Pizzas">Clásicas</a>
+                <a href="#cat-Pizzas-Especiales">Especiales</a>
+                <a href="#cat-Postres">Postres</a>
+                <a href="#cat-Bebidas-Frías">Bebidas</a>
+                <a href="#seccion-carrito" class="nav-cart">🛒 Carrito</a>
+            </nav>
+        </div>
     </header>
+
+    <section class="hero-section">
+        <img src="logo.png" alt="Ionics Pizza Logo" class="logo-hero">
+        <h1 class="titulo-menu">MENÚ</h1>
+        <div class="texto-hero">
+            <p>Bienvenidos a Ionics Pizza, nos enorgullece ofrecerte pizzas únicas hechas con masa madre, elaboradas con ingredientes frescos y de calidad, con el amor y la paciencia que cada receta requiere. En Ionics, creemos que la comida no es solo para alimentar el cuerpo, sino para nutrir el alma. Nuestra filosofía se basa en disfrutar el presente, honrar el proceso y crear en cada bocado instantes que valgan la pena compartir.</p>
+            <p>Nuestra masa madre, fermentada durante 24 a 48 horas, es el alma de nuestras creaciones, su proceso es natural, elaborada únicamente con harina y agua, sin levaduras químicas o agregadas, crea una textura ligera, aireada y un sabor profundo que solo el tiempo puede ofrecer.</p>
+            <p>Deseamos que disfrutes de esta experiencia.</p>
+            <p><strong>Bienvenidos a Ionics Pizza</strong></p>
+        </div>
+        <a href="#menu-contenedor" class="btn-ordenar-ahora">Ordenar Ahora 👇</a>
+    </section>
 
     <main class="contenedor-principal">
         <section id="menu-contenedor" class="menu-seccion"></section>
 
-        <aside class="carrito-seccion">
+        <aside id="seccion-carrito" class="carrito-seccion">
             <h2>Tu Pedido</h2>
             <div id="lista-carrito">
                 <p>El carrito está vacío</p>

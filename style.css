@@ -6,6 +6,11 @@
     --blanco: #ffffff;
 }
 
+/* Scroll suave para cuando hagan clic en el menú */
+html {
+    scroll-behavior: smooth; 
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--fondo);
@@ -14,20 +19,109 @@ body {
     padding: 0;
 }
 
-header {
+/* 2. HEADER Y BARRA DE NAVEGACIÓN FIJA */
+.header-principal {
     background-color: var(--blanco);
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.logo-header {
-    height: 60px;
-    display: block;
+.nav-container {
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
-/* 2. ESTRUCTURA PRINCIPAL */
+.logo-nav {
+    height: 45px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--naranja);
+}
+
+.nav-cart {
+    background: var(--naranja);
+    color: white !important;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(208, 123, 59, 0.3);
+}
+
+/* 3. SECCIÓN DE BIENVENIDA (HERO) */
+.hero-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 50px auto 40px auto;
+    padding: 0 20px;
+}
+
+.logo-hero {
+    height: 140px;
+    margin-bottom: 15px;
+}
+
+.titulo-menu {
+    font-size: 4em;
+    color: #1a2a3a;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+.texto-hero {
+    font-style: italic;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    font-size: 1.05em;
+}
+
+.texto-hero p {
+    margin-bottom: 15px;
+}
+
+.btn-ordenar-ahora {
+    display: inline-block;
+    background-color: var(--naranja);
+    color: white;
+    text-decoration: none;
+    padding: 15px 35px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(208, 123, 59, 0.4);
+}
+
+.btn-ordenar-ahora:hover {
+    background-color: #b86930;
+    transform: translateY(-3px);
+}
+
+/* 4. ESTRUCTURA PRINCIPAL DEL MENÚ */
 .contenedor-principal {
     display: flex;
     flex-wrap: wrap;
@@ -45,10 +139,11 @@ header {
 .categoria-titulo {
     border-bottom: 3px solid var(--naranja);
     padding-bottom: 5px;
-    margin-top: 30px;
+    margin-top: 40px; /* Separación extra para que el scroll del menú no lo tape */
+    scroll-margin-top: 80px; /* Para que al hacer clic en el menú superior no se oculte el título */
 }
 
-/* 3. TARJETAS DE PRODUCTO */
+/* 5. TARJETAS DE PRODUCTO */
 .producto-card {
     background: var(--blanco);
     padding: 15px;
@@ -80,7 +175,7 @@ header {
     background-color: #b86930;
 }
 
-/* 4. CARRITO Y FORMULARIO */
+/* 6. CARRITO Y FORMULARIO */
 .carrito-seccion {
     flex: 1;
     min-width: 300px;
@@ -90,7 +185,8 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     height: fit-content;
     position: sticky;
-    top: 20px;
+    top: 90px; /* Ajustado para que no choque con la navbar */
+    scroll-margin-top: 90px;
 }
 
 .item-carrito {
@@ -126,7 +222,7 @@ input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 
 .label-checkbox { display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; }
 .label-checkbox input { width: auto; }
 
-/* 5. ESTILOS DEL MODAL */
+/* 7. ESTILOS DEL MODAL */
 .modal {
     display: none; 
     position: fixed; 
@@ -177,8 +273,11 @@ input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 
 
 .nota-carrito { font-size: 0.85em; color: #666; font-style: italic; margin-top: 4px; }
 
-/* 6. DISEÑO RESPONSIVO */
+/* 8. DISEÑO RESPONSIVO */
 @media (max-width: 768px) {
+    .nav-container { flex-direction: column; gap: 10px; }
+    .nav-links { justify-content: center; }
+    .titulo-menu { font-size: 3em; }
     .contenedor-principal { flex-direction: column; padding: 10px; }
     .carrito-seccion { position: relative; top: 0; }
     .producto-card { flex-direction: column; }

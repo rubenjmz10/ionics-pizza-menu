@@ -11,32 +11,41 @@ const menuData = [
     { id: 8, categoria: "Pizzas", nombre: "Poderosa", desc: "Todo el sabor que una pizza puede tener.<br> Salsa de tomate casera, queso mozzarella, queso provolone y queso parmesano, con carne molida especiada, salchicha de res, peperoni, pimiento morrón, cebolla morada y aceitunas negras.", precio: 240, disponible: true },
     { id: 9, categoria: "Pizzas", nombre: "Perona", desc: "Un equilibrio entre lo intenso, lo dulce y lo salado.<br> Salsa de tomate casera, queso mozzarella, pera caramelizada con piloncillo, queso azul, tocino ahumado y nuez pecana.", precio: 235, disponible: true },
     
-    // Pizzas Especiales (NUEVAS)
-    { id: 25, categoria: "Pizzas Especiales", nombre: "Barbacoa de Picaña", desc: "Deliciosa barbacoa de picaña, cebolla y cilantro fresco.", precio: 320, disponible: true, especial: true, salsaVerde: true },
-    { id: 26, categoria: "Pizzas Especiales", nombre: "Burrata", desc: "Auténtico queso burrata y jamón serrano.", precio: 250, disponible: true, especial: true, permiteMitad: false },
-    { id: 27, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Especialidad con tocino.", precio: 250, disponible: true, especial: true },
-    { id: 28, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Corazones de alcachofa. Elige tu complemento.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
+    // Pizzas Especiales
+    { id: 10, categoria: "Pizzas Especiales", nombre: "Barbacoa de Picaña", desc: "Deliciosa barbacoa de picaña, cebolla y cilantro fresco.", precio: 320, disponible: true, especial: true, salsaVerde: true },
+    { id: 11, categoria: "Pizzas Especiales", nombre: "Burrata", desc: "Auténtico queso burrata y jamón serrano.", precio: 250, disponible: true, especial: true, permiteMitad: false },
+    { id: 12, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Especialidad con tocino.", precio: 250, disponible: true, especial: true },
+    { id: 13, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Corazones de alcachofa. Elige tu complemento.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
+    { id: 14, categoria: "Pizzas Especiales", nombre: "Higo y Panceta", desc: "Corazones de alcachofa. Elige tu complemento.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
+    { id: 15, categoria: "Pizzas Especiales", nombre: "Huitlacoche", desc: "Corazones de alcachofa. Elige tu complemento.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
 
     // Especialidades
-    { id: 10, categoria: "Hot Dog y Calzones", nombre: "Hot Dog con Madre", desc: "Nuestro Hot Dog es una experiencia única.<br> Horneado en una base de masa madre con una salchicha de res, carne molida sazonada con especias, queso mozarella y cebolla asada, con opción de tocino, champiñones, migas de chicharrón o un poco de los 3. Tamaño 22 cm. aprox.", precio: 140, disponible: true },
-    { id: 11, categoria: "Hot Dog y Calzones", nombre: "Calzone Veggie", desc: "Frescura horneada al vapor.<br> Salsa de tomate casera, queso mozzarella y provolone, champiñones, pimiento morrón, cebolla morada, aceitunas negras, espinaca, albahaca fresca y parmesano.", precio: 225, disponible: true },
-    { id: 12, categoria: "Hot Dog y Calzones", nombre: "Calzone Hot Honey", desc: "Sabor irresistible con un toque muy hot.<br> Salsa de tomate casera, queso mozzarella, peperoni, queso parmesano y miel de piloncillo con chile piquín seco.", precio: 225, disponible: true },
+    { id: 16, categoria: "Hot Dog y Calzones", nombre: "Hot Dog con Madre", desc: "Nuestro Hot Dog es una experiencia única.<br> Horneado en una base de masa madre con una salchicha de res, carne molida sazonada con especias, queso mozarella y cebolla asada, con opción de tocino, champiñones, migas de chicharrón o un poco de los 3. Tamaño 22 cm. aprox.", precio: 140, disponible: true },
+    { id: 17, categoria: "Hot Dog y Calzones", nombre: "Calzone Veggie", desc: "Frescura horneada al vapor.<br> Salsa de tomate casera, queso mozzarella y provolone, champiñones, pimiento morrón, cebolla morada, aceitunas negras, espinaca, albahaca fresca y parmesano.", precio: 225, disponible: true },
+    { id: 18, categoria: "Hot Dog y Calzones", nombre: "Calzone Hot Honey", desc: "Sabor irresistible con un toque muy hot.<br> Salsa de tomate casera, queso mozzarella, peperoni, queso parmesano y miel de piloncillo con chile piquín seco.", precio: 225, disponible: true },
  
+    // Postres
+    { id: 31, categoria: "Postres", nombre: "Galletitas de Masa Madre", desc: "Deliciosas galletas horneadas con chocolate y nuez de Castilla.", precio: 45, disponible: true },
+    { id: 32, categoria: "Postres", nombre: "Cheesecake de Lotus", desc: "Cremoso cheesecake con base y cobertura de galleta Lotus.", precio: 85, disponible: true },
+    { id: 33, categoria: "Postres", nombre: "Budín de Blueberries", desc: "Suave budín con frescos blueberries.", precio: 60, disponible: true },
+    { id: 34, categoria: "Postres", nombre: "Pastel de Zanahoria", desc: "Clásico pastel de zanahoria con especias y cubierta dulce.", precio: 75, disponible: true },
+    { id: 35, categoria: "Postres", nombre: "Mostachón", desc: "Tradicional base crujiente con crema y fruta fresca.", precio: 80, disponible: true },
+
     // Bebidas Frías
-    { id: 13, categoria: "Bebidas Frías", nombre: "Agua de jamaica con romero 350ml", desc: "", precio: 32, disponible: true },
-    { id: 14, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 350ml", desc: "", precio: 32, disponible: true },
-    { id: 15, categoria: "Bebidas Frías", nombre: "Agua mineral de Lourdes 355ml", desc: "", precio: 26, disponible: true },
-    { id: 16, categoria: "Bebidas Frías", nombre: "Agua de jamaica c/agua mineral 355ml", desc: "", precio: 48, disponible: true },
-    { id: 17, categoria: "Bebidas Frías", nombre: "Agua de jamaica o frutas 1 Litro", desc: "", precio: 75, disponible: true },
+    { id: 19, categoria: "Bebidas Frías", nombre: "Agua de jamaica con romero 350ml", desc: "", precio: 32, disponible: true },
+    { id: 20, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 350ml", desc: "", precio: 32, disponible: true },
+    { id: 21, categoria: "Bebidas Frías", nombre: "Agua mineral de Lourdes 355ml", desc: "", precio: 26, disponible: true },
+    { id: 22, categoria: "Bebidas Frías", nombre: "Agua de jamaica c/agua mineral 355ml", desc: "", precio: 48, disponible: true },
+    { id: 23, categoria: "Bebidas Frías", nombre: "Agua de jamaica o frutas 1 Litro", desc: "", precio: 75, disponible: true },
 
     // Bebidas Calientes
-    { id: 18, categoria: "Bebidas Calientes", nombre: "Espresso 45ml", desc: "Con café", precio: 45, disponible: true },
-    { id: 19, categoria: "Bebidas Calientes", nombre: "Americano 255ml", desc: "Con café", precio: 50, disponible: true },
-    { id: 20, categoria: "Bebidas Calientes", nombre: "Cappuccino 195ml", desc: "Con café", precio: 55, disponible: true, personalizable: 'leche' },
-    { id: 21, categoria: "Bebidas Calientes", nombre: "Café oaxaqueño 265ml", desc: "Espresso + leche + chocolate oaxaqueño", precio: 68, disponible: true, personalizable: 'base-agua-leche' },
-    { id: 22, categoria: "Bebidas Calientes", nombre: "Chocolate semiamargo 280ml", desc: "Leche o agua + chocolate oaxaqueño", precio: 65, disponible: true, personalizable: 'base-agua-leche' },
-    { id: 23, categoria: "Bebidas Calientes", nombre: "Tisanas 280ml", desc: "Pregunta por disponibilidad", precio: 40, disponible: true },
-    { id: 24, categoria: "Bebidas Calientes", nombre: "Infusiones de té (sobre) 280ml", desc: "", precio: 25, disponible: true }
+    { id: 24, categoria: "Bebidas Calientes", nombre: "Espresso 45ml", desc: "Con café", precio: 45, disponible: true },
+    { id: 25, categoria: "Bebidas Calientes", nombre: "Americano 255ml", desc: "Con café", precio: 50, disponible: true },
+    { id: 26, categoria: "Bebidas Calientes", nombre: "Cappuccino 195ml", desc: "Con café", precio: 55, disponible: true, personalizable: 'leche' },
+    { id: 27, categoria: "Bebidas Calientes", nombre: "Café oaxaqueño 265ml", desc: "Espresso + leche + chocolate oaxaqueño", precio: 68, disponible: true, personalizable: 'base-agua-leche' },
+    { id: 28, categoria: "Bebidas Calientes", nombre: "Chocolate semiamargo 280ml", desc: "Leche o agua + chocolate oaxaqueño", precio: 65, disponible: true, personalizable: 'base-agua-leche' },
+    { id: 29, categoria: "Bebidas Calientes", nombre: "Tisanas 280ml", desc: "Pregunta por disponibilidad", precio: 40, disponible: true },
+    { id: 30, categoria: "Bebidas Calientes", nombre: "Infusiones de té (sobre) 280ml", desc: "", precio: 25, disponible: true }
 ];
 
 // --- 2. CONFIGURACIÓN DE EXTRAS PIZZAS ---
@@ -70,8 +79,7 @@ function renderizarMenu() {
     if (!contenedor) return;
     contenedor.innerHTML = '';
     
-    // Forzamos el orden de las categorías para que Especiales salga justo después de Pizzas
-    const ordenCategorias = ["Pizzas", "Pizzas Especiales", "Hot Dog y Calzones", "Bebidas Frías", "Bebidas Calientes"];
+    const ordenCategorias = ["Pizzas", "Pizzas Especiales", "Hot Dog y Calzones", "Postres", "Bebidas Frías", "Bebidas Calientes"];
     
     ordenCategorias.forEach(categoria => {
         const productos = menuData.filter(item => item.categoria === categoria && item.disponible);
@@ -79,6 +87,8 @@ function renderizarMenu() {
             const titulo = document.createElement('h2');
             titulo.className = 'categoria-titulo';
             titulo.textContent = categoria;
+            // NUEVO: Se le asigna un ID a cada categoría para que la barra de navegación funcione
+            titulo.id = 'cat-' + categoria.replace(/\s+/g, '-'); 
             contenedor.appendChild(titulo);
 
             productos.forEach(producto => {
