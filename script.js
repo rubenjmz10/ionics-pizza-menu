@@ -171,7 +171,8 @@ function abrirModal(id) {
         
     } else if (producto.nombre.includes("Hot Dog")) {
         opcionesHotdog.style.display = 'block';
-        // NUEVO: Asegurarnos de que el cuadro de elección aparezca si es Hot Dog
+        
+        // Asegurarnos de que el cuadro de elección aparezca si es Hot Dog
         if (producto.eleccionGratis) {
             document.getElementById('opciones-pizza').style.display = 'block'; 
             document.getElementById('seccion-mitad-pizza').style.display = 'none'; 
@@ -189,7 +190,7 @@ function abrirModal(id) {
         }
     }
 
-    // Mostrar opciones de elección gratis si la pizza lo requiere
+    // Mostrar opciones de elección gratis si el producto lo requiere
     const divEleccion = document.getElementById('opciones-eleccion');
     const selectorEleccion = document.getElementById('selector-eleccion');
     
@@ -254,7 +255,7 @@ function llenarSelectorMitad(idActual) {
         (p.categoria === "Pizzas" || p.categoria === "Pizzas Especiales") && 
         p.id !== idActual && 
         p.permiteMitad !== false &&
-        p.disponible === true // <-- ¡Aquí está la corrección!
+        p.disponible === true
     );
     otrasPizzas.forEach(p => {
         select.innerHTML += `<option value="${p.id}">${p.nombre} ($${p.precio})</option>`;
@@ -368,7 +369,7 @@ function confirmarAgregar() {
             resumenExtras.push(`Aderezos: ${aderezosSeleccionados.join(", ")}`);
         }
 
-        // NUEVO: Agregado para que capture la elección gratis del Hot Dog
+        // Capturar la elección gratis del Hot Dog
         if (productoEnEdicion.eleccionGratis) {
             const eleccion = document.getElementById('selector-eleccion').value;
             resumenExtras.push(`Lleva: ${eleccion}`);
@@ -451,7 +452,8 @@ function eliminarDelCarrito(index) {
 // LÓGICA CONDICIONAL DE FORMULARIO
 function verificarCamposCondicionales() {
     const tipoEntrega = document.getElementById('tipo-entrega').value;
-    const metodoPago = document.getElementById('metodo-pago').value;
+    const metodoPagoSelect = document.getElementById('metodo-pago');
+    const metodoPago = metodoPagoSelect.value;
     
     const isDomicilio = tipoEntrega === 'A domicilio';
     const isEfectivo = metodoPago === 'Efectivo';
@@ -466,6 +468,29 @@ function verificarCamposCondicionales() {
 
     // Mostrar/Ocultar aviso de Mercado Pago
     document.getElementById('aviso-mercadopago').style.display = isMercadoPago ? 'block' : 'none';
+
+    // LÓGICA: Ocultar pago en sucursal si es a domicilio
+    for (let i = 0; i < metodoPagoSelect.options.length; i++) {
+        if (metodoPagoSelect.options[i].value === 'Tarjeta (Pago en sucursal)') {
+            if (isDomicilio) {
+                // Deshabilitamos y ocultamos la opción
+                metodoPagoSelect.options[i].disabled = true;
+                metodoPagoSelect.options[i].style.display = 'none'; 
+                
+                // Si el cliente ya había escogido "Pago en sucursal" y luego cambia a "Domicilio", lo pasamos a Efectivo
+                if (metodoPago === 'Tarjeta (Pago en sucursal)') {
+                    metodoPagoSelect.value = 'Efectivo';
+                    // Volvemos a correr la función para evaluar si muestra la cajita del "Cambio"
+                    verificarCamposCondicionales(); 
+                    return; // Salimos para no causar ciclo
+                }
+            } else {
+                // Si es "Para comer aquí" o "Pick Up", volvemos a habilitar la opción
+                metodoPagoSelect.options[i].disabled = false;
+                metodoPagoSelect.options[i].style.display = 'block';
+            }
+        }
+    }
 }
 
 function toggleHorarioEspecifico() {
@@ -641,6 +666,7 @@ async function cargarDisponibilidadYRenderizar() {
             
             const columnas = fila.split(',');
             
+            // Usamos índice 0 y 2 porque se eliminó la columna vacía en Sheets
             const idSheet = parseInt(columnas[0].trim());
             const disponibleSheet = columnas[2].trim().toUpperCase() === 'SI';
             
@@ -654,6 +680,7 @@ async function cargarDisponibilidadYRenderizar() {
 
     } catch (error) {
         console.error("Hubo un error leyendo Google Sheets, cargando menú por defecto...", error);
+        renderizarMenu();
     }
 }
 
