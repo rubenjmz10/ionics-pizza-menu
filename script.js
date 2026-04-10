@@ -30,7 +30,7 @@ const menuData = [
     { id: 33, categoria: "Postres", nombre: "Budín de Blueberries", desc: "Suave budín con frescos blueberries.", precio: 60, disponible: true },
     { id: 34, categoria: "Postres", nombre: "Pastel de Zanahoria", desc: "Clásico pastel de zanahoria con especias y cubierta dulce.", precio: 90, disponible: true },
     { id: 35, categoria: "Postres", nombre: "Mostachón", desc: "Tradicional base crujiente con crema y fruta fresca.", precio: 80, disponible: true },
-    { id: 37, categoria: "Postres", nombre: "Panectios de masa madre", desc: "Con mermelada de durazno, romero, y queso brie", precio: 45, disponible: true },
+    { id: 37, categoria: "Postres", nombre: "Panecitos de masa madre", desc: "Con mermelada de durazno, romero, y queso brie", precio: 45, disponible: true },
 
 
     // Bebidas Frías
