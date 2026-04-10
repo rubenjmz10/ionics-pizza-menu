@@ -13,9 +13,9 @@ const menuData = [
     
     // Pizzas Especiales
     { id: 10, categoria: "Pizzas Especiales", nombre: "Barbacoa de Picaña", desc: "Deliciosa barbacoa de picaña, cebolla y cilantro fresco.", precio: 320, disponible: true, especial: true, salsaVerde: true },
-    { id: 11, categoria: "Pizzas Especiales", nombre: "Burrata", desc: "Auténtico queso burrata y jamón serrano.", precio: 250, disponible: true, especial: true, permiteMitad: false },
-    { id: 12, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Especialidad con tocino.", precio: 250, disponible: true, especial: true },
-    { id: 13, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Base blanca de garbanzo, Queso provolone, Corazones de alcachofa, Espinacas, Chorizo argentino o champiñones.", precio: 250, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
+    { id: 11, categoria: "Pizzas Especiales", nombre: "Burrata", desc: "Queso burrata, Pesto, tomatitos deshidratados,albahaca fresca, y jamón serrano.", precio: 320, disponible: true, especial: true, permiteMitad: false },
+    { id: 12, categoria: "Pizzas Especiales", nombre: "Bianca", desc: "Panceta con cebolla caramelizada al vino blanco, queso brie, y miel de monte.", precio: 295, disponible: true, especial: true },
+    { id: 13, categoria: "Pizzas Especiales", nombre: "Doña Chofis", desc: "Base blanca de garbanzo, Queso provolone, Corazones de alcachofa, Espinacas, Chorizo argentino o champiñones.", precio: 320, disponible: true, especial: true, eleccionGratis: ["Chorizo argentino", "Champiñones"] },
     { id: 14, categoria: "Pizzas Especiales", nombre: "Higo y Panceta", desc: "Base blanca de aceite de oliva, , queso mozzarella, panceta con cebolla caramelizada al vino tinto, queso de cabra, nuez, albahaca fresca ", precio: 250, disponible: true, especial: true},
     { id: 15, categoria: "Pizzas Especiales", nombre: "Huitlacoche", desc: "Huitlacoche", precio: 250, disponible: true, especial: true},
 
@@ -25,11 +25,13 @@ const menuData = [
     { id: 18, categoria: "Hot Dog y Calzones", nombre: "Calzone Hot Honey", desc: "Sabor irresistible con un toque muy hot.<br> Salsa de tomate casera, queso mozzarella, peperoni, queso parmesano y miel de piloncillo con chile piquín seco.", precio: 225, disponible: true },
  
     // Postres
-    { id: 31, categoria: "Postres", nombre: "Galletitas de Masa Madre", desc: "Deliciosas galletas horneadas con chocolate y nuez de Castilla.", precio: 45, disponible: true },
-    { id: 32, categoria: "Postres", nombre: "Cheesecake de Lotus", desc: "Cremoso cheesecake con base y cobertura de galleta Lotus.", precio: 85, disponible: true },
+    { id: 31, categoria: "Postres", nombre: "Galletitas de Masa Madre", desc: "Deliciosas galletas horneadas con chocolate y nuez de Castilla.", precio: 35, disponible: true },
+    { id: 32, categoria: "Postres", nombre: "Cheesecake de Biscoff", desc: "Cremoso cheesecake con base y cobertura de galleta Biscoff.", precio: 140, disponible: true },
     { id: 33, categoria: "Postres", nombre: "Budín de Blueberries", desc: "Suave budín con frescos blueberries.", precio: 60, disponible: true },
-    { id: 34, categoria: "Postres", nombre: "Pastel de Zanahoria", desc: "Clásico pastel de zanahoria con especias y cubierta dulce.", precio: 75, disponible: true },
+    { id: 34, categoria: "Postres", nombre: "Pastel de Zanahoria", desc: "Clásico pastel de zanahoria con especias y cubierta dulce.", precio: 90, disponible: true },
     { id: 35, categoria: "Postres", nombre: "Mostachón", desc: "Tradicional base crujiente con crema y fruta fresca.", precio: 80, disponible: true },
+    { id: 37, categoria: "Postres", nombre: "Panectios de masa madre", desc: "Con mermelada de durazno, romero, y queso brie", precio: 45, disponible: true },
+
 
     // Bebidas Frías
     { id: 19, categoria: "Bebidas Frías", nombre: "Agua de jamaica con romero 350ml", desc: "", precio: 32, disponible: true },
