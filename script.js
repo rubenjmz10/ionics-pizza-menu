@@ -32,7 +32,6 @@ const menuData = [
     { id: 35, categoria: "Postres", nombre: "Mostachón", desc: "Tradicional base crujiente con crema y fruta fresca.", precio: 80, disponible: true },
     { id: 37, categoria: "Postres", nombre: "Panecitos de masa madre", desc: "Con mermelada de durazno, romero, y queso brie", precio: 45, disponible: true },
 
-
     // Bebidas Frías
     { id: 19, categoria: "Bebidas Frías", nombre: "Agua de jamaica con romero 350ml", desc: "", precio: 32, disponible: true },
     { id: 20, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 350ml", desc: "", precio: 32, disponible: true },
@@ -157,13 +156,8 @@ function abrirModal(id) {
             document.getElementById('seccion-mitad-pizza').style.display = 'none';
         }
 
-        // Lógica Ingredientes Extras (Solo clásicas)
-        if (producto.especial) {
-            document.getElementById('seccion-extras-pizza').style.display = 'none';
-        } else {
-            document.getElementById('seccion-extras-pizza').style.display = 'block';
-            generarInterfazExtras();
-        }
+        // Llamamos a la función inteligente para evaluar si mostrar o bloquear extras
+        actualizarNombresMitades();
 
         // Lógica Salsita Verde
         if (producto.salsaVerde) {
@@ -174,7 +168,6 @@ function abrirModal(id) {
     } else if (producto.nombre.includes("Hot Dog")) {
         opcionesHotdog.style.display = 'block';
         
-        // Asegurarnos de que el cuadro de elección aparezca si es Hot Dog
         if (producto.eleccionGratis) {
             document.getElementById('opciones-pizza').style.display = 'block'; 
             document.getElementById('seccion-mitad-pizza').style.display = 'none'; 
@@ -231,6 +224,7 @@ function generarInterfazExtras() {
         grupo.items.forEach(extra => {
             const div = document.createElement('div');
             div.className = 'fila-extra';
+            // NOTA: Se agregó class="opt-toda" a la opción "Toda la pizza"
             div.innerHTML = `
                 <span>${extra}</span>
                 <select class="selector-extra" 
@@ -238,7 +232,7 @@ function generarInterfazExtras() {
                         data-precio-completo="${grupo.precioCompleto}" 
                         data-precio-mitad="${grupo.precioMitad}">
                     <option value="no">No agregar</option>
-                    <option value="toda">Toda la pizza (+$${grupo.precioCompleto})</option>
+                    <option value="toda" class="opt-toda">Toda la pizza (+$${grupo.precioCompleto})</option>
                     <option value="m1" class="label-m1">Solo en una mitad (+$${grupo.precioMitad})</option>
                     <option value="m2" class="label-m2" style="display:none;"></option>
                 </select>
@@ -251,8 +245,6 @@ function generarInterfazExtras() {
 function llenarSelectorMitad(idActual) {
     const select = document.getElementById('segunda-pizza-select');
     select.innerHTML = '';
-    // Filtramos para que se pueda combinar con Clásicas o Especiales, 
-    // que permita mitad, ¡Y QUE ESTÉ DISPONIBLE!
     const otrasPizzas = menuData.filter(p => 
         (p.categoria === "Pizzas" || p.categoria === "Pizzas Especiales") && 
         p.id !== idActual && 
@@ -273,29 +265,63 @@ function toggleMitad() {
 function actualizarNombresMitades() {
     const isMitad = document.getElementById('check-mitad').checked;
     const selectSegunda = document.getElementById('segunda-pizza-select');
+    const seccionExtras = document.getElementById('seccion-extras-pizza');
     
-    if (isMitad) {
-        const nombreM1 = productoEnEdicion.nombre;
-        const nombreM2 = selectSegunda.options[selectSegunda.selectedIndex]?.text.split(' (')[0] || "Otra Mitad";
+    let p2 = null;
+    if (isMitad && selectSegunda.value) {
+        p2 = menuData.find(p => p.id === parseInt(selectSegunda.value));
+    }
 
-        // Solo actualizar labels de extras si existen (pizzas clásicas)
-        if (!productoEnEdicion.especial) {
-            document.querySelectorAll('.selector-extra').forEach(select => {
-                select.querySelector('.label-m1').textContent = `Solo en ${nombreM1} (+$${select.dataset.precioMitad})`;
-                const optM2 = select.querySelector('.label-m2');
-                optM2.style.display = 'block';
-                optM2.textContent = `Solo en ${nombreM2} (+$${select.dataset.precioMitad})`;
-            });
-        }
+    const p1Especial = productoEnEdicion.especial === true;
+    const p2Especial = p2 ? (p2.especial === true) : false;
+
+    // Mostrar u ocultar la sección de extras completa.
+    // Solo se oculta si AMBAS pizzas en juego son Especiales, o si es una sola Especial sin combinar.
+    if (p1Especial && (!isMitad || p2Especial)) {
+        seccionExtras.style.display = 'none';
     } else {
-        if (!productoEnEdicion.especial) {
-            document.querySelectorAll('.selector-extra').forEach(select => {
-                select.querySelector('.label-m1').textContent = `Solo en una mitad (+$${select.dataset.precioMitad})`;
-                const optM2 = select.querySelector('.label-m2');
-                optM2.style.display = 'none'; 
-                if (select.value === 'm2') select.value = 'no';
-            });
+        seccionExtras.style.display = 'block';
+        
+        // Generar la interfaz de extras si está vacía
+        if (document.getElementById('contenedor-extras').innerHTML === '') {
+            generarInterfazExtras();
         }
+
+        // Evaluar qué opciones de extras bloquear o mostrar
+        document.querySelectorAll('.selector-extra').forEach(select => {
+            const optToda = select.querySelector('.opt-toda'); 
+            const optM1 = select.querySelector('.label-m1');
+            const optM2 = select.querySelector('.label-m2');
+
+            const nombreM1 = productoEnEdicion.nombre;
+            const nombreM2 = p2 ? p2.nombre : "Otra Mitad";
+
+            // Reiniciar la visibilidad de las opciones
+            if (optToda) optToda.style.display = 'block';
+            if (optM1) optM1.style.display = 'block';
+            
+            if (isMitad) {
+                if (optM2) optM2.style.display = 'block';
+                if (optM1) optM1.textContent = `Solo en ${nombreM1} (+$${select.dataset.precioMitad})`;
+                if (optM2) optM2.textContent = `Solo en ${nombreM2} (+$${select.dataset.precioMitad})`;
+                
+                if (p1Especial && !p2Especial) {
+                    // Si la Base es especial y la mitad Clásica: solo se puede agregar en M2
+                    if (optToda) optToda.style.display = 'none';
+                    if (optM1) optM1.style.display = 'none';
+                    if (select.value === 'toda' || select.value === 'm1') select.value = 'no';
+                } else if (!p1Especial && p2Especial) {
+                    // Si la Base es clásica y la mitad Especial: solo se puede agregar en M1
+                    if (optToda) optToda.style.display = 'none';
+                    if (optM2) optM2.style.display = 'none';
+                    if (select.value === 'toda' || select.value === 'm2') select.value = 'no';
+                }
+            } else {
+                if (optM2) optM2.style.display = 'none';
+                if (optM1) optM1.textContent = `Solo en una mitad (+$${select.dataset.precioMitad})`;
+                if (select.value === 'm2') select.value = 'no';
+            }
+        });
     }
 }
 
@@ -327,26 +353,24 @@ function confirmarAgregar() {
 
     // LÓGICA PIZZAS EXTRAS Y OPCIONES
     if (esPizza) {
-        // Solo sumamos ingredientes extra si NO es pizza especial
-        if (!productoEnEdicion.especial) {
-            document.querySelectorAll('.selector-extra').forEach(select => {
-                const opcion = select.value;
-                const ingrediente = select.getAttribute('data-ingrediente');
-                const pCompleto = parseFloat(select.getAttribute('data-precio-completo'));
-                const pMitad = parseFloat(select.getAttribute('data-precio-mitad'));
+        // Recorremos los extras. La interfaz ya bloqueó lo inválido de las pizzas especiales.
+        document.querySelectorAll('.selector-extra').forEach(select => {
+            const opcion = select.value;
+            const ingrediente = select.getAttribute('data-ingrediente');
+            const pCompleto = parseFloat(select.getAttribute('data-precio-completo'));
+            const pMitad = parseFloat(select.getAttribute('data-precio-mitad'));
 
-                if (opcion === 'toda') {
-                    precioFinal += pCompleto;
-                    resumenExtras.push(`${ingrediente} (Toda)`);
-                } else if (opcion === 'm1') {
-                    precioFinal += pMitad;
-                    resumenExtras.push(`${ingrediente} (Mitad ${isMitad ? textoMitad1 : 'pizza'})`);
-                } else if (opcion === 'm2') {
-                    precioFinal += pMitad;
-                    resumenExtras.push(`${ingrediente} (Mitad ${textoMitad2})`);
-                }
-            });
-        }
+            if (opcion === 'toda') {
+                precioFinal += pCompleto;
+                resumenExtras.push(`${ingrediente} (Toda)`);
+            } else if (opcion === 'm1') {
+                precioFinal += pMitad;
+                resumenExtras.push(`${ingrediente} (Mitad ${isMitad ? textoMitad1 : 'pizza'})`);
+            } else if (opcion === 'm2') {
+                precioFinal += pMitad;
+                resumenExtras.push(`${ingrediente} (Mitad ${textoMitad2})`);
+            }
+        });
 
         // Elección Gratis (Aplica tanto a clásicas como especiales si la tienen)
         if (productoEnEdicion.eleccionGratis) {
@@ -371,7 +395,6 @@ function confirmarAgregar() {
             resumenExtras.push(`Aderezos: ${aderezosSeleccionados.join(", ")}`);
         }
 
-        // Capturar la elección gratis del Hot Dog
         if (productoEnEdicion.eleccionGratis) {
             const eleccion = document.getElementById('selector-eleccion').value;
             resumenExtras.push(`Lleva: ${eleccion}`);
@@ -475,19 +498,15 @@ function verificarCamposCondicionales() {
     for (let i = 0; i < metodoPagoSelect.options.length; i++) {
         if (metodoPagoSelect.options[i].value === 'Tarjeta (Pago en sucursal)') {
             if (isDomicilio) {
-                // Deshabilitamos y ocultamos la opción
                 metodoPagoSelect.options[i].disabled = true;
                 metodoPagoSelect.options[i].style.display = 'none'; 
                 
-                // Si el cliente ya había escogido "Pago en sucursal" y luego cambia a "Domicilio", lo pasamos a Efectivo
                 if (metodoPago === 'Tarjeta (Pago en sucursal)') {
                     metodoPagoSelect.value = 'Efectivo';
-                    // Volvemos a correr la función para evaluar si muestra la cajita del "Cambio"
                     verificarCamposCondicionales(); 
-                    return; // Salimos para no causar ciclo
+                    return; 
                 }
             } else {
-                // Si es "Para comer aquí" o "Pick Up", volvemos a habilitar la opción
                 metodoPagoSelect.options[i].disabled = false;
                 metodoPagoSelect.options[i].style.display = 'block';
             }
@@ -668,7 +687,6 @@ async function cargarDisponibilidadYRenderizar() {
             
             const columnas = fila.split(',');
             
-            // Usamos índice 0 y 2 porque se eliminó la columna vacía en Sheets
             const idSheet = parseInt(columnas[0].trim());
             const disponibleSheet = columnas[2].trim().toUpperCase() === 'SI';
             
