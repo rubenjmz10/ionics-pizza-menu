@@ -37,8 +37,8 @@ const menuData = [
     { id: 20, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 350ml", desc: "", precio: 32, disponible: true },
     { id: 21, categoria: "Bebidas Frías", nombre: "Agua mineral de Lourdes 355ml", desc: "", precio: 26, disponible: true },
     { id: 22, categoria: "Bebidas Frías", nombre: "Agua de jamaica c/agua mineral 355ml", desc: "", precio: 48, disponible: true },
-    { id: 23, categoria: "Bebidas Frías", nombre: "Agua de jamaica 1 Litro", desc: "", precio: 75, disponible: true },
-    { id: 36, categoria: "Bebidas Frías", nombre: "Agua de frutas 1 Litro", desc: "", precio: 75, disponible: true },
+    { id: 23, categoria: "Bebidas Frías", nombre: "Agua de jamaica con romero 1 Litro", desc: "", precio: 75, disponible: true },
+    { id: 36, categoria: "Bebidas Frías", nombre: "Agua de frutas tropicales 1 Litro", desc: "Piña, guayaba, y gengibre", precio: 75, disponible: true },
 
     // Bebidas Calientes
     { id: 24, categoria: "Bebidas Calientes", nombre: "Espresso 45ml", desc: "Con café", precio: 45, disponible: true },
